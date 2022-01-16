@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700&family=Lexend+Deca&display=swap");
 
 :root {
-  --dark: #100526;
+  --dark: #02011f;
   --darker: #020105;
   --light: #eeaeca;
   --pink: #ec4899;
@@ -54,6 +54,8 @@ input {
 }
 button {
   appearance: none;
+  outline: none;
+  background: none;
 }
 
 #new-task-input {
@@ -142,7 +144,9 @@ main {
   font-size: 1rem;
   text-transform: uppercase;
   font-weight: 500;
-  transition: 0.4s;
+  transition: 0.5s;
+  border: none;
+  appearance: none;
 }
 .task .actions button:hover {
   opacity: 0.8;
@@ -162,7 +166,7 @@ main {
 .task .actions .delete {
   color: crimson;
 }
-
+/* For the toggle button */
 .switch-label {
   width: 150px;
 }
