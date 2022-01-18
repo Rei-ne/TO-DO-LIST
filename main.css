@@ -14,11 +14,11 @@
   font-family: "lexend deca", sans-serif;
 }
 body {
-  background-color: #99eeff;
   color: var(--darker);
+  background: linear-gradient(53deg, #ccfffc, #ffcccf);
 }
 .dark-mode {
-  background-color: var(--dark);
+  background: var(--dark);
   color: var(--dark);
 }
 .container {
