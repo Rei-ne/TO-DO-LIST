@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Reine's To-Do List</title>
-    <link rel="stylesheet" href="./main.css"
+    <link rel="stylesheet" href="./main.css" />
   </head>
   <body>
 
@@ -20,6 +20,7 @@
     </div>
 
     <div class="container">
+      <div class="date"></div>
       <header>
         <h1>My To-Do List</h1>
 
@@ -30,7 +31,8 @@
             id="new-task-input"
             placeholder="Add a task"
           />
-          <input type="submit" id="new-task-submit" value="Add" />
+          <input type="submit" id="new-task-submit" value="Add">
+          <input type="button" id="new-task-save" value="Save Tasks">
         </form>
       </header>
 
@@ -46,7 +48,7 @@
               </div>
             </div>
           </div>
-          <!-- <div id="tasks">
+          <div id="tasks">
             <div class="task">
               <div class="content">
                 <input type="text" class="text" value="" readonly />
@@ -59,6 +61,8 @@
            -->
           </div>
         </section>
+        <br>
+        <div id="previouss"></div>
       </main>
     </div>
 </div>
