@@ -3,10 +3,34 @@ function myFunction() {
     element.classList.toggle("dark-mode");
 };
 
+/* The date */
+const date = document.querySelector(".date");
+const dater = new Date(),
+    dayOfMonth = dater.getDate(),
+    year = dater.getFullYear(),
+    months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+    ],
+    monthOfYear = months[dater.getMonth()],
+    todaysDate = "Day" + " " + dayOfMonth + ", " + monthOfYear + ", " + year;
+date.textContent = todaysDate;
+
 window.addEventListener('load', () => {
     const form = document.querySelector("#new-task-form");
     const input = document.querySelector("#new-task-input");
     const list_el = document.querySelector("#tasks");
+    const dish_el = document.querySelector("#previouss");
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -72,9 +96,57 @@ window.addEventListener('load', () => {
         task_delete_el.addEventListener('click', () => {
             list_el.removeChild(task_el);
         });
-
-
-
-
     });
+/* 0xgrowth decided to add the possibility of storing tasks so that even after 
+refreshing the page the user can access previous tasks */
+
+const buttoon = document.querySelector("#new-task-save");
+
+buttoon.onclick = function() {
+
+    // const task = input.value;
+    // THIS IS WHERE IT GETS TRICKY YOU KNOW, I NEED TO DEFINE WHAT GETS STORED HERE.
+    
+            let oldd = [];
+            let oldTask = {
+                id: todaysDate,
+                tasks: task
+            } 
+        oldd.push(oldTask);
+// console.warn ('added', {oldd});
+        localStorage.setItem('preTasks', JSON.stringify(oldd));
+
+/*I love this JS*/
+
+const fish_el = document.createElement("button");
+fish_el.classList.add("dishes");
+fish_el.innerHTML = "Display Previous Tasks";
+
+/* This if else statement prevents the 'display previous tasks button from
+ popping up multiple times whenever the 'save task button is clicked */
+
+if ( dish_el.hasChildNodes() === true ) {
+    console.log(' ');
+} else {
+    dish_el.appendChild(fish_el);
+}
+
+fish_el.addEventListener('click', (b) => {
+    b.preventDefault();
+
+    const bed = document.createElement("div");
+    bed.classList.add("previous");
+    let c = localStorage.getItem('preTasks', JSON.stringify(oldd));
+    bed.innerHTML = c;
+
+    dish_el.appendChild(bed);
+
+    const aish_el = document.createElement("button");
+    aish_el.classList.add("hider");
+    aish_el.innerHTML = "Hide Previous Tasks";    
+
+    dish_el.appendChild(aish_el);
+    });
+
+   }
 });
