@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Reine's To-Do List</title>
     <link rel="stylesheet" href="./main.css" />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.5/css/unicons.css">
   </head>
   <body>
 
@@ -24,22 +25,32 @@
       <header>
         <h1>My To-Do List</h1>
 
-        <form id="new-task-form">
+        <!-- <form id="new-task-form"> -->
           <input
             type="text"
             name="new-task-input"
             id="new-task-input"
             placeholder="Add a task"
           />
-          <input type="submit" id="new-task-submit" value="Add">
-          <input type="button" id="new-task-save" value="Save Tasks">
-        </form>
+          <!-- <input type="submit" id="new-task-submit" value="Add"> -->
+        <!-- </form> -->
       </header>
 
       <main>
         <section class="task-list">
-          <h2>Tasks</h2>
-          <div id="tasks">
+            <!-- task 1: Onclick of Enter Button, Tasks displays 
+            task 2: onclick of enter button, tasks gets added to localstorage,
+            task 3: on refresh, it stays on page, till clear list is clicked.
+            task 4: create clear button that empties localstorage. -->
+            <div class="topMenu">
+              <div class="filters">
+                  <span id="all" class="active">All</span>
+                  <span id="pending">Unfinished</span>
+                  <span id="complete">Completed</span>
+              </div>
+              <button class="clear">Clear List</button>
+          </div>
+          <ul class="tasks"></ul>
             <!-- <div class="task">
               <div class="content"></div>
               <div class="actions">
@@ -59,10 +70,8 @@
               </div>
             </div>
            -->
-          </div>
         </section>
         <br>
-        <div id="previouss"></div>
       </main>
     </div>
 </div>
