@@ -1,80 +1,117 @@
-function myFunction() {
+function darkMode() {
     var element = document.body;
     element.classList.toggle("dark-mode");
 };
 
-window.addEventListener('load', () => {
-    const form = document.querySelector("#new-task-form");
-    const input = document.querySelector("#new-task-input");
-    const list_el = document.querySelector("#tasks");
+// On app load, get all tasks from localStorage
+window.onload = loadTasks;
 
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
+// On form submit add task
+document.querySelector("form").addEventListener("submit", e => {
+    e.preventDefault();
+    addTask();
+});
 
-        const task = input.value;
+function loadTasks() {
+    // check if localStorage has any tasks
+    // if not then return
+    if (localStorage.getItem("tasks") == null) return;
 
-        if (!task) {
-            alert("Please fill out the task");
+    // Get the tasks from localStorage and convert it to an array
+    let tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
+
+    // Loop through the tasks and add them to the list
+    tasks.forEach(task => {
+
+        const li = document.createElement("li");
+        li.innerHTML = `<input type="checkbox" onclick="taskComplete(this)" class="check" ${task.completed ? 'checked' : ''}>
+    <input type="text" value="${task.task}" class="task ${task.completed ? 'completed' : ''}" onfocus="getCurrentTask(this)" onblur="editTask(this)">
+    <i class="fa fa-trash" onclick="removeTask(this)"></i>`;
+        list.insertBefore(li, list.children[0]);
+    });
+}
+
+function addTask() {
+    const task = document.querySelector("form input");
+    const list = document.querySelector("ul");
+    // return if task is empty
+    if (task.value === "") {
+        alert("Please add some task!");
+        return false;
+    }
+    // check is task already exist
+    if (document.querySelector(`input[value="${task.value}"]`)) {
+        alert("Task already exist!");
+        return false;
+    }
+
+    // add task to local storage
+    localStorage.setItem("tasks", JSON.stringify([...JSON.parse(localStorage.getItem("tasks") || "[]"), { task: task.value, completed: false }]));
+
+    // create list item, add innerHTML and append to ul
+    const li = document.createElement("li");
+    li.innerHTML = `<input type="checkbox" onclick="taskComplete(this)" class="check">
+<input type="text" value="${task.value}" class="task" onfocus="getCurrentTask(this)" onblur="editTask(this)">
+<i class="fa fa-trash" onclick="removeTask(this)"></i>`;
+    list.insertBefore(li, list.children[0]);
+    // clear input
+    task.value = "";
+}
+
+function taskComplete(event) {
+    let tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
+    tasks.forEach(task => {
+        if (task.task === event.nextElementSibling.value) {
+            task.completed = !task.completed;
+        }
+    });
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    event.nextElementSibling.classList.toggle("completed");
+}
+
+function removeTask(event) {
+    let tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
+    tasks.forEach(task => {
+        if (task.task === event.parentNode.children[1].value) {
+            // delete task
+            tasks.splice(tasks.indexOf(task), 1);
+        }
+    });
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    event.parentElement.remove();
+}
+
+// store current task to track changes
+var currentTask = null;
+
+// get current task
+function getCurrentTask(event) {
+    currentTask = event.value;
+}
+
+// edit the task and update local storage
+function editTask(event) {
+    let tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
+    // check if task is empty
+    if (event.value === "") {
+        alert("Task is empty!");
+        event.value = currentTask;
+        return;
+    }
+    // task already exist
+    tasks.forEach(task => {
+        if (task.task === event.value) {
+            alert("Task already exist!");
+            event.value = currentTask;
             return;
         }
-
-        const task_el = document.createElement("div");
-        task_el.classList.add("task");
-
-        const task_content_el = document.createElement("div");
-        task_content_el.classList.add("content");
-
-        // task_content_el.innerText = task;
-
-        task_el.appendChild(task_content_el);
-
-        const task_input_el = document.createElement("input");
-        task_input_el.classList.add("text");
-        task_input_el.type = "text";
-        task_input_el.value = task;
-        task_input_el.setAttribute("readonly","readonly");
-
-        task_content_el.appendChild(task_input_el);
-
-        const task_actions_el = document.createElement("div");
-        task_actions_el.classList.add("actions");
-
-        const task_edit_el = document.createElement("button");
-        task_edit_el.classList.add("edit");
-        task_edit_el.innerHTML = "Edit";
-
-        const task_delete_el = document.createElement("button");
-        task_delete_el.classList.add("delete");
-        task_delete_el.innerHTML = "Delete";
-
-        task_actions_el.appendChild(task_edit_el);
-        task_actions_el.appendChild(task_delete_el);
-
-        task_el.appendChild(task_actions_el);
-
-        list_el.appendChild(task_el);
-
-        input.value = "";
-
-        task_edit_el.addEventListener('click', () => {
-            if (task_edit_el.innerText.toLowerCase() === "edit") {
-                task_input_el.removeAttribute("readonly");
-                task_input_el.focus();
-                task_edit_el.innerText = "Save";
-            }
-            else {
-                task_input_el.setAttribute("readonly","readonly");
-                task_edit_el.innerText = "Edit";
-
-            }
-        });
-
-        task_delete_el.addEventListener('click', () => {
-            list_el.removeChild(task_el);
-        });
-
-
-
-
     });
-});
+    // update task
+    tasks.forEach(task => {
+        if (task.task === currentTask) {
+            task.task = event.value;
+        }
+    });
+    // update local storage
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
