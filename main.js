@@ -1,6 +1,7 @@
 function darkMode() {
     var element = document.body;
     element.classList.toggle("dark-mode");
+
 };
 
 // On app load, get all tasks from localStorage
@@ -22,6 +23,7 @@ function loadTasks() {
 
     // Loop through the tasks and add them to the list
     tasks.forEach(task => {
+        const list = document.querySelector("ul");
 
         const li = document.createElement("li");
         li.innerHTML = `<input type="checkbox" onclick="taskComplete(this)" class="check" ${task.completed ? 'checked' : ''}>
@@ -36,10 +38,10 @@ function addTask() {
     const list = document.querySelector("ul");
     // return if task is empty
     if (task.value === "") {
-        alert("Please add some task!");
+        alert("Please add a task!");
         return false;
     }
-    // check is task already exist
+    // check is task already exists
     if (document.querySelector(`input[value="${task.value}"]`)) {
         alert("Task already exist!");
         return false;
@@ -57,7 +59,7 @@ function addTask() {
     // clear input
     task.value = "";
 }
-
+// completed task
 function taskComplete(event) {
     let tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
     tasks.forEach(task => {

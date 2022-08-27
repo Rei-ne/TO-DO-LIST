@@ -5,42 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Reine's To-Do List</title>
-    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="./main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    />
   </head>
   <body>
-<!-- dark mode button -->
-      <div class="switch-holder">
-        <div class="switch-label">DARK MODE
-            <i class="fa fa-toggle-b"></i><span></span>
-        </div>
-        <div class="switch-toggle">
-            <input onclick="darkMode()" type="checkbox" id="toggle">
-            <label for="toggle"></label>
-        </div>
-    </div>
-
     <div class="container">
       <header>
         <h1>Reine's To-do App</h1>
-        <h3>made with vanilla javascript and lots of love</h3>
-<!-- add task -->
-        <form id="new-task-form">
-          <input
-            type="text"
-            name="new-task-input"
 
-            placeholder="Add a task"
-          />
-          <button type="submit">ADD</button>
-
-        </form>
+        <!-- dark mode button -->
+        <div class="switch-holder">
+          <div class="switch-label">
+            <i class="fa fa-toggle-b"></i><span></span>
+          </div>
+          <div class="switch-toggle">
+            <input onclick="darkMode()" type="checkbox" id="toggle" />
+            <label for="toggle"></label>
+          </div>
+        </div>
       </header>
-<!-- tasks -->
+
+      <!-- add task -->
+      <form id="new-task-form">
+        <input type="text" id="new-task-input" placeholder="Type here..." />
+        <button type="submit">ADD</button>
+      </form>
+
+      <!-- tasks -->
       <main>
-        <section class="task-list">
+        <div class="task-list">
           <h2>Tasks</h2>
           <ul></ul>
-            <!-- <div class="task">
+          <!-- <div class="task">
               <div class="content"></div>
               <div class="actions">
                 <button class="edit">Edit</button>
@@ -54,16 +53,18 @@
                 <input type="text" class="text" value="" readonly />
               </div>
               <div class="actions"> -->
-            <!-- <button class="edit">Edit</button>
+          <!-- <button class="edit">Edit</button>
                 <button class="delete">Delete</button>
               </div>
             </div>
            -->
-          </div>
-        </section>
+        </div>
       </main>
+      <script src="main.js"></script>
+      <footer>
+        Made by
+        <a href="https://github.com/Rei-ne" target="_blank">Reine</a> with love
+      </footer>
     </div>
-</div>
-    <script src="main.js"></script>
   </body>
 </html>
