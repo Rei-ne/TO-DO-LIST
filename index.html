@@ -14,7 +14,7 @@
   <body>
     <div class="container">
       <header>
-        <h1>Reine's To-do App</h1>
+        <h1>Reine's To-do List App</h1>
 
         <!-- dark mode button -->
         <div class="switch-holder">
@@ -30,8 +30,13 @@
 
       <!-- add task -->
       <form id="new-task-form">
-        <input type="text" id="new-task-input" placeholder="Type here..." />
-        <button type="submit">ADD</button>
+        <input
+          type="text"
+          autocomplete="off"
+          id="new-task-input"
+          placeholder="Type here..."
+        />
+        <button type="submit">Add</button>
       </form>
 
       <!-- tasks -->
@@ -39,25 +44,6 @@
         <div class="task-list">
           <h2>Tasks</h2>
           <ul></ul>
-          <!-- <div class="task">
-              <div class="content"></div>
-              <div class="actions">
-                <button class="edit">Edit</button>
-                <button class="delete">Delete</button>
-              </div>
-            </div>
-          </div>
-          <div id="tasks">
-            <div class="task">
-              <div class="content">
-                <input type="text" class="text" value="" readonly />
-              </div>
-              <div class="actions"> -->
-          <!-- <button class="edit">Edit</button>
-                <button class="delete">Delete</button>
-              </div>
-            </div>
-           -->
         </div>
       </main>
       <script src="main.js"></script>

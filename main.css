@@ -39,7 +39,7 @@ body {
  ul {
   list-style-type: none;
   display: flex;
-flex-direction: column;
+  flex-direction: column;
   margin: 0px;
   padding: 0px;
 }
@@ -65,18 +65,16 @@ li{
   border-radius: 10px;
   margin: 5px 0 ;
   transition: all 2.5s ease;
-  text-align: center;
-  margin-left: 15px;
 }
 
-li i{
-}
-li input{
-  word-break:break-all; /* wrap extended text*/
+h2{
+  font-size: 1rem;
+  color: var(--gray);
 
 }
-h1,h2 {
-  font-size: 2rem;
+
+h1 {
+  font-size: 1.5rem;
   font-weight: 300;
   margin-bottom: 1rem;
   color: var(--gray);
@@ -126,6 +124,11 @@ div .task-list{
   padding: 10px;
 
 }
+.task{
+  width: fit-content;
+
+}
+
 
 .check {
   width: 0.8em;
@@ -138,14 +141,18 @@ div .task-list{
 }
 
 .check:checked {
-  background-color: #1dd2af;
+  background-color: rgb(255, 82, 82);
+  ;
 }
 
 
 .task:focus {
   outline: none;
 }
-
+li i{
+  float: right;
+margin-right: 5px;
+}
 
 
   li i:hover {
