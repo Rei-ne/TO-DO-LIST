@@ -83,7 +83,7 @@ input::placeholder {
 
 /* footer link */
 a {
-  font-size: 1rem;
+  font-size: 0.7rem;
   font-weight: 300;
   color: var(--darker);
 }
@@ -93,7 +93,7 @@ footer {
   padding: 0;
   color: var(--dark);
   text-align: center;
-  font-size: 1rem;
+  font-size: 0.7rem;
 }
 .dark-mode input,
 .dark-mode footer {
