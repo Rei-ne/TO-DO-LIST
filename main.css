@@ -16,119 +16,120 @@
 body {
   color: var(--darker);
   background: linear-gradient(53deg, #ccfffc, #ffcccf);
-
 }
-
 
 .dark-mode {
   background: var(--dark);
   color: var(--gray);
-
 }
 .container {
-  height: 100vh;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
+  justify-content: center;
   align-items: center;
   position: relative;
   font-family: "Lexend Deca", sans-serif;
+  height: 100vh;
 }
 
-
- ul {
+ul {
   list-style-type: none;
   display: flex;
   flex-direction: column;
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
 }
 
-.dark-mode li{
+.dark-mode li {
   background-image: linear-gradient(to right, var(--darker), var(--dark));
   color: var(--gray);
   border: 1px solid var(--gray);
 }
 
-
-
-.dark-mode button{
+.dark-mode button {
   background-image: linear-gradient(to right, var(--darker), var(--dark));
-
   color: var(--gray);
 }
 
 /* task container */
-li{
-  padding: 20px 5px;
+li {
+  height: 80px;
+  padding: 20px 15px;
   background-image: linear-gradient(to right, var(--gray), var(--light));
   border-radius: 10px;
-  margin: 5px 0 ;
-  transition: all 2.5s ease;
+  margin: 5px 0;
 }
 
-h2{
+h2 {
   font-size: 1rem;
   color: var(--gray);
-
 }
-
+legend {
+  font-size: 1.2rem;
+  color: var(--gray);
+}
 h1 {
   font-size: 1.5rem;
   font-weight: 300;
   margin-bottom: 1rem;
   color: var(--gray);
 }
-input::placeholder{
+input::placeholder {
   color: var(--gray);
   font-weight: 500;
   font-size: 1.2rem;
+  border-radius: 10%;
 }
 
 /* footer link */
- a{
+a {
   font-size: 1rem;
   font-weight: 300;
   color: var(--darker);
 }
 
-footer{
-  margin-top: 300px;
+footer {
+  margin-top: 1rem;
   padding: 0;
   color: var(--dark);
   text-align: center;
   font-size: 1rem;
 }
-.dark-mode input, .dark-mode footer{
+.dark-mode input,
+.dark-mode footer {
   color: var(--gray);
+}
+p {
+  font-size: 0.8rem;
+  color: var(--gray);
+  font-style: italic;
 }
 header {
   padding: 2rem 1rem;
   max-width: 800px;
   margin: 0 auto;
 }
-div .task-list{
+div .task-list {
   width: 40vw;
 }
 
 #new-task-form {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
   padding: 5px;
-
-
 }
 
-#new-task-input{
+#new-task-input {
   margin-right: 5px;
   border-radius: 10px;
   padding: 10px;
-
 }
-.task{
+.task {
   width: fit-content;
-
 }
-
 
 .check {
   width: 0.8em;
@@ -142,20 +143,18 @@ div .task-list{
 
 .check:checked {
   background-color: rgb(255, 82, 82);
-  ;
 }
-
 
 .task:focus {
   outline: none;
 }
-li i{
+li i {
   float: right;
-margin-right: 5px;
+  margin-right: 5px;
 }
 
-
-  li i:hover {
+li i:hover {
+  cursor: pointer;
   color: rgb(255, 82, 82);
 }
 
@@ -171,43 +170,40 @@ input {
   background: none;
   font-size: 1rem;
   border-radius: 10px;
-
-
 }
 button {
   appearance: none;
   outline: none;
+  border: none;
   background-image: linear-gradient(to right, var(--gray), var(--light));
   padding: 10px;
   width: 50%;
   border-radius: 10px;
   color: var(--darker);
+  cursor: pointer;
 }
-
 
 /* For the toggle button */
-.switch-holder{
-position: relative;
-right: 0;
-
+.switch-holder {
+  position: relative;
+  right: 0;
 }
-@media screen and (max-width:480px){
-  .switch-holder{
-   position: relative;
-
+@media screen and (max-width: 480px) {
+  .switch-holder {
+    position: relative;
   }
-  h1,h2 {
+
+  h1,
+  h2 {
     font-size: 1.5rem;
   }
-  div .task-list{
-width: 80vw;
+  div .task-list {
+    width: 80vw;
   }
-  li{
+  li {
     min-width: 80vw;
   }
-
 }
-
 
 .switch-label {
   width: 150px;

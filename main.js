@@ -1,36 +1,47 @@
 function darkMode() {
     var element = document.body;
     element.classList.toggle("dark-mode");
-
 };
 
-// On app load, get all tasks from localStorage
-window.onload = loadTasks;
+window.onload = function () {
+    loadTasks();
 
-// On form submit add task
-document.querySelector("form").addEventListener("submit", e => {
-    e.preventDefault();
-    addTask();
-});
+    // On form submit add task
+    document.querySelector("form").addEventListener("submit", e => {
+        e.preventDefault();
+        addTask();
+        loadTasks(); // Call loadTasks after adding a new task to refresh the list
+    });
+};
 
 function loadTasks() {
-    // check if localStorage has any tasks
-    // if not then return
-    if (localStorage.getItem("tasks") == null) return;
+    const tasksArray = JSON.parse(localStorage.getItem("tasks") || "[]");
 
-    // Get the tasks from localStorage and convert it to an array
-    let tasks = Array.from(JSON.parse(localStorage.getItem("tasks")));
+    // Clear existing content in the task list
+    const taskList = document.querySelector("ul");
+    taskList.innerHTML = "";
 
-    // Loop through the tasks and add them to the list
-    tasks.forEach(task => {
-        const list = document.querySelector("ul");
-
-        const li = document.createElement("li");
-        li.innerHTML = `<input type="checkbox" onclick="taskComplete(this)" class="check" ${task.completed ? 'checked' : ''}>
-    <input type="text" value="${task.task}" class="task ${task.completed ? 'completed' : ''}" onfocus="getCurrentTask(this)" onblur="editTask(this)">
-    <i class="fa fa-trash" onclick="removeTask(this)"></i>`;
-        list.insertBefore(li, list.children[0]);
-    });
+    // Check if there are tasks in localStorage
+    if (tasksArray.length === 0) {
+        const empty = document.createElement("div");
+        empty.innerHTML = `<p>You have no current tasks</p>`;
+        const taskListContainer = document.querySelector("#task-list");
+        taskListContainer.appendChild(empty);
+    } else {
+        // Remove the "You have no current tasks" message if it exists
+        const emptyMessage = document.querySelector("#task-list div");
+        if (emptyMessage) {
+            emptyMessage.remove();
+        }
+        // Loop through the tasks and add them to the list
+        tasksArray.forEach(task => {
+            const li = document.createElement("li");
+            li.innerHTML = `<input type="checkbox" onclick="taskComplete(this)" class="check" ${task.completed ? 'checked' : ''}>
+            <input type="text" value="${task.task}" class="task ${task.completed ? 'completed' : ''}" onfocus="getCurrentTask(this)" onblur="editTask(this)">
+            <i class="fa fa-trash" onclick="removeTask(this)"></i>`;
+            taskList.appendChild(li);
+        });
+    }
 }
 
 function addTask() {
@@ -81,6 +92,14 @@ function removeTask(event) {
     });
     localStorage.setItem("tasks", JSON.stringify(tasks));
     event.parentElement.remove();
+
+    // Check if there are tasks in localStorage
+    if (tasks.length === 0) {
+        const empty = document.createElement("div");
+        empty.innerHTML = `<p>You have no current tasks</p>`;
+        const taskListContainer = document.querySelector("#task-list");
+        taskListContainer.appendChild(empty);
+    }
 }
 
 // store current task to track changes
@@ -103,7 +122,7 @@ function editTask(event) {
     // task already exist
     tasks.forEach(task => {
         if (task.task === event.value) {
-            alert("Task already exist!");
+            alert("Task already exists!");
             event.value = currentTask;
             return;
         }

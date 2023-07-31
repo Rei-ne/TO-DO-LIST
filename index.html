@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Reine's To-Do List</title>
+    <title>Reine's To-Do App</title>
     <link rel="stylesheet" href="./main.css" />
     <link
       rel="stylesheet"
@@ -14,7 +14,7 @@
   <body>
     <div class="container">
       <header>
-        <h1>Reine's To-do List App</h1>
+        <h1>Reine's To-do App</h1>
 
         <!-- dark mode button -->
         <div class="switch-holder">
@@ -30,6 +30,8 @@
 
       <!-- add task -->
       <form id="new-task-form">
+        <legend>Enter your task below</legend>
+
         <input
           type="text"
           autocomplete="off"
@@ -41,16 +43,16 @@
 
       <!-- tasks -->
       <main>
-        <div class="task-list">
+        <div id="task-list" class="task-list">
           <h2>Tasks</h2>
           <ul></ul>
         </div>
       </main>
-      <script src="main.js"></script>
       <footer>
         Made by
         <a href="https://github.com/Rei-ne" target="_blank">Reine</a> with love
       </footer>
     </div>
+    <script src="main.js"></script>
   </body>
 </html>
