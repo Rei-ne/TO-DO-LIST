@@ -10,7 +10,7 @@ window.onload = function () {
     document.querySelector("form").addEventListener("submit", e => {
         e.preventDefault();
         addTask();
-        loadTasks(); // Call loadTasks after adding a new task to refresh the list
+
     });
 };
 
@@ -69,6 +69,8 @@ function addTask() {
     list.insertBefore(li, list.children[0]);
     // clear input
     task.value = "";
+
+    loadTasks(); // Call loadTasks after adding a new task to refresh the list
 }
 // completed task
 function taskComplete(event) {
