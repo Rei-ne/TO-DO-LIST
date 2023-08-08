@@ -7,8 +7,7 @@ const APP_STATIC_RESOURCES = [
     "/index.html",
     "/main.css",
     "/main.js",
-    "/manifest.json",
-    "/icon.png"
+    "/icon.png",
 ];
 
 // On install, cache the static resources
