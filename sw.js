@@ -12,51 +12,53 @@ const APP_STATIC_RESOURCES = [
 ];
 
 // On install, cache the static resources
-self.addEventListener("install", (e) => {
-    e.waitUntil((async () => {
-        const cache = await caches.open(CACHE_NAME);
-        cache.addAll(APP_STATIC_RESOURCES);
-    })()
+self.addEventListener("install", (event) => {
+    event.waitUntil(
+        (async () => {
+            const cache = await caches.open(CACHE_NAME);
+            cache.addAll(APP_STATIC_RESOURCES);
+        })()
     );
 });
 
-// delete old cache on activate
-self.addEventListener("activate", (e) => {
-    e.waitUntil(
+// delete old caches on activate
+self.addEventListener("activate", (event) => {
+    event.waitUntil(
         (async () => {
             const names = await caches.keys();
             await Promise.all(
                 names.map((name) => {
                     if (name !== CACHE_NAME) {
-                        return caches.delete(name)
+                        return caches.delete(name);
                     }
                 })
             );
-            await clients.claim()
+            await clients.claim();
         })()
     );
-})
+});
 
-// on fetch, intercept server requests and respond with cached responses instead of going to network
-self.addEventListener("fetch", (e) => {
-    // as a single page app, direct app to always go to cached homepage
-    if (e.request.mode === "navigate") {
-        e.respondWith(caches.match("/"))
+// On fetch, intercept server requests
+// and respond with cached responses instead of going to network
+self.addEventListener("fetch", (event) => {
+    // As a single page app, direct app to always go to cached home page.
+    if (event.request.mode === "navigate") {
+        event.respondWith(caches.match("/"));
         return;
     }
 
     // For all other requests, go to the cache first, and then the network.
-    e.respondWith(
+    event.respondWith(
         (async () => {
             const cache = await caches.open(CACHE_NAME);
-            const cachedResponse = await cache.match(e.request);
+            const cachedResponse = await cache.match(event.request);
             if (cachedResponse) {
-                // return if available
-                return cachedResponse
+                // Return the cached response if it's available.
+                return cachedResponse;
             } else {
-                // if resource isnt in the cache, return a 404
+                // If resource isn't in the cache, return a 404.
                 return new Response(null, { status: 404 });
             }
         })()
-    )
-})
+    );
+});
