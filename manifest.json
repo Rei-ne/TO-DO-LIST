@@ -1,0 +1,15 @@
+{
+    "name": "Reine's ToDo App",
+    "short_name": "ReineTDA",
+    "description": "Enter your tasks, my todo app saves your private data to your browser on your device so you can come back to your tasks.",
+    "icons":[
+        {
+            "src": "icon.png",
+            "sizes": "256x256"
+        }
+    ],
+    "start_url": "/",
+    "theme_color": "#eeaeca",
+    "background_color": "#eeaeca",
+    "display": "standalone"
+}
